@@ -8,13 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 //Everytime you ask for a item's NEW instence, add AddTransient. Most common.
-//builder.Services.AddTransient<DemoLogic>();
+builder.Services.AddTransient<IDemoLogic,AnotherDemoLogic>();
 
 //Everytime you ask for a item's SAME instence EVERYWHARE, add AddSIngleton. most common in DesktopApp
 //builder.Services.AddSingleton<DemoLogic>();
 
 //Everytime you ask for a item's SAME instence For SAME person, add AddScoped. Most common in web
-builder.Services.AddScoped<DemoLogic>();
+//builder.Services.AddScoped<DemoLogic>();
 
 
 var app = builder.Build();
