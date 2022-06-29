@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using DependencyInjectionDemo.Logic;
+using Serilog;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,10 @@ builder.Services.AddTransient<IDemoLogic,AnotherDemoLogic>();
 //Everytime you ask for a item's SAME instence For SAME person, add AddScoped. Most common in web
 //builder.Services.AddScoped<DemoLogic>();
 
+//Override .net default logger with Serilog.(a structured logger)
+builder.Host.UseSerilog((ctx, lc) => lc
+       .WriteTo.Console()
+       .ReadFrom.Configuration(ctx.Configuration));
 
 var app = builder.Build();
 
